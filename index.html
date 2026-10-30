@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Greenstreet: community sustainability</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f7ef;--card:#fff;--ink:#1d2b21;--mut:#5d6f62;--g:#2f7d4f;--g2:#dff0e2;--w:#2c7fb8;--w2:#dcecf6;--e:#d79a12;--e2:#fbefc9;--r:#c2512f;--r2:#fbe2d9;--line:#dbe5d6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#111a14;--card:#1a261d;--ink:#e6efe6;--mut:#9db0a1;--g:#5dbb82;--g2:#21392a;--w:#6ab6e6;--w2:#1b3243;--e:#e8b94a;--e2:#3a3219;--r:#ec8a68;--r2:#44261c;--line:#2b3d30}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#111a14;--card:#1a261d;--ink:#e6efe6;--mut:#9db0a1;--g:#5dbb82;--g2:#21392a;--w:#6ab6e6;--w2:#1b3243;--e:#e8b94a;--e2:#3a3219;--r:#ec8a68;--r2:#44261c;--line:#2b3d30}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Nunito,system-ui,-apple-system,Segoe UI,sans-serif;padding-bottom:84px}
+main{max-width:760px;margin:0 auto;padding:16px}
+h1,h2,h3{line-height:1.2;margin:0 0 8px}h1{font-size:1.7rem}h2{font-size:1.25rem;margin-top:22px}h3{font-size:1.02rem}
+p{margin:0 0 10px;max-width:68ch}.mut{color:var(--mut);font-size:.92rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.hero{background:var(--g);color:#fff;border-radius:28px;padding:20px;margin-bottom:14px}
+.hero p{color:#e8f5ea}
+.btn{font:inherit;font-weight:800;border:0;border-radius:14px;padding:12px 16px;background:var(--g);color:#fff;cursor:pointer;min-height:44px}
+.btn.alt{background:var(--g2);color:var(--g)}.btn.big{width:100%;font-size:1.15rem;padding:18px;background:#fff;color:#1f5a38;border-radius:18px}
+.btn:disabled{opacity:.55;cursor:default}
+.btn:focus-visible,.tile:focus-visible,nav a:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--e);outline-offset:2px}
+.tile{font:inherit;color:inherit;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;cursor:pointer}
+.tile .em{font-size:1.8rem;display:block}.tile b{display:block;line-height:1.2;margin-top:4px}
+.bar{height:12px;border-radius:8px;background:var(--line);overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;border-radius:8px;background:var(--g);transition:width .6s}
+.pill{display:inline-block;border-radius:20px;padding:2px 10px;font-size:.82rem;font-weight:800;background:var(--g2);color:var(--g)}
+.pill.o{background:var(--e2);color:var(--e)}.pill.r{background:var(--r2);color:var(--r)}.pill.b{background:var(--w2);color:var(--w)}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{border-radius:18px;padding:14px;background:var(--g2)}.stat.w{background:var(--w2)}.stat.e{background:var(--e2)}.stat.r{background:var(--r2)}
+.stat b{font-size:1.3rem;display:block}
+label{display:block;font-weight:800;margin:12px 0 4px}
+select,input{font:inherit;width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.steps{display:flex;flex-direction:column;gap:6px;margin:10px 0}.step{padding:8px 12px;border-radius:12px;background:var(--bg);color:var(--mut)}.step.on{background:var(--g2);color:var(--g);font-weight:800}
+.chain{background:var(--g2);color:var(--g);border-radius:14px;padding:10px 14px;font-weight:800;margin:8px 0}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+nav a{flex:1;text-align:center;text-decoration:none;color:var(--mut);font-size:.72rem;font-weight:800;padding:4px 2px;border-radius:12px;min-height:44px}
+nav a span{display:block;font-size:1.35rem;line-height:1.2}nav a.on{color:var(--g);background:var(--g2)}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translate(-50%,-120px);background:#1f5a38;color:#fff;padding:12px 18px;border-radius:16px;font-weight:800;z-index:9;transition:transform .35s;max-width:92vw;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.tabs{display:flex;gap:6px;margin:8px 0}.tabs .btn{flex:1;padding:8px}
+details summary{cursor:pointer;font-weight:800}
+.hero2{border-radius:28px;padding:20px;color:#fff;text-align:center;background:radial-gradient(circle at 85% 0,rgba(226,201,150,.35),transparent 45%),linear-gradient(165deg,#2f7d4f,#1a4d33);margin-bottom:14px}.hero2 p{color:#e8f5ea;margin:0 auto 8px}.hero2 h1{margin-bottom:6px}
+.ringwrap{position:relative;width:190px;height:190px;margin:12px auto}.ringwrap svg{width:100%;height:100%}.rb{fill:none;stroke:rgba(255,255,255,.22);stroke-width:9}.rf{fill:none;stroke:#ffe27a;stroke-width:9;stroke-linecap:round;stroke-dasharray:339.3;stroke-dashoffset:339.3;transition:stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)}.rcn{position:absolute;inset:0;display:grid;place-content:center;text-align:center}.rcn b{font-size:3rem;line-height:1}.up{font-weight:800;color:#ffe27a!important;animation:rise .8s .6s both}@keyframes rise{from{transform:translateY(10px);opacity:0}}
+.days{display:flex;gap:6px;margin-top:10px}.day{flex:1;height:34px;border-radius:10px;background:var(--bg);display:grid;place-items:center;font-weight:800;color:var(--mut)}.day.on{background:var(--g);color:#fff}.pulse{animation:pu 1.6s infinite}@keyframes pu{50%{box-shadow:0 0 0 7px rgba(215,154,18,.35)}}.bump{animation:bm .5s}@keyframes bm{50%{transform:scale(1.3)}}
+.ta{position:relative;display:flex;gap:12px;align-items:center;flex-wrap:wrap;transition:transform .2s}.ta:hover{transform:translateY(-2px)}.ta .ic{font-size:2.1rem;width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--g2)}.ta.done{opacity:.85}.ta.glow{animation:gl 1s}@keyframes gl{40%{box-shadow:0 0 22px var(--g)}}
+.float{position:absolute;right:16px;top:8px;font-weight:800;font-size:1.2rem;color:var(--g);animation:fl 1s ease-out forwards;pointer-events:none}@keyframes fl{to{transform:translateY(-36px);opacity:0}}
+.leaf{position:fixed;z-index:20;pointer-events:none;font-size:1.1rem;animation:lf 1.1s ease-out forwards}@keyframes lf{to{transform:translate(var(--dx),calc(var(--dy) + 150px)) rotate(240deg);opacity:0}}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.res{position:relative;overflow:hidden;border:0;border-radius:22px;padding:14px;text-align:left;color:#fff;font:inherit;cursor:pointer;min-height:140px;transition:transform .2s}.res:hover{transform:translateY(-3px)}.res:focus-visible{outline:3px solid var(--e);outline-offset:2px}.res>*{position:relative;z-index:1}.res b{display:block;font-size:1.45rem}.res small,.res em{display:block;font-style:normal;opacity:.92}.res .bar{background:rgba(255,255,255,.25)}.res .bar i{background:#fff}.res .fx{position:absolute!important;z-index:0!important;pointer-events:none}
+.res.w{background:linear-gradient(160deg,#0b6fa4,#19a7c9)}.res.w .fx{left:0;right:0;bottom:0;height:40px;opacity:.28;background:radial-gradient(circle at 50% 0,#fff 0 45%,transparent 46%) 0 0/60px 40px repeat-x;animation:wv 6s linear infinite}@keyframes wv{to{background-position:60px 0}}
+.res.e{background:linear-gradient(160deg,#14213d,#27386b);color:#ffe27a}.res.e .bar i{background:#ffd23f}.res.e .fx{left:0;width:50%;bottom:18%;height:3px;background:linear-gradient(90deg,transparent,#ffd23f,transparent);animation:flow 2.4s ease-in-out infinite}@keyframes flow{0%{transform:translateX(-60%)}100%{transform:translateX(220%)}}
+.res.wa{background:linear-gradient(160deg,#1f7a5c,#3aa882)}.res.wa .fx{right:12px;bottom:4px;font-size:3.4rem;opacity:.3;animation:spin 20s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.res.f{background:linear-gradient(160deg,#c4650c,#e58a2d)}.res.f .fx{right:14px;bottom:8px;font-size:2rem;opacity:.5;animation:flt 3s ease-in-out infinite}@keyframes flt{50%{transform:translateY(-10px)}}
+.sec-w{--card:#eaf7fc;--ink:#0a3550;--mut:#44718a;--line:#bfe3f2;--g:#0b6fa4;--g2:#cdeaf7;--w:#0b8fbf;--bg:#d4eef8;position:relative;overflow:hidden;padding-bottom:50px}.sec-w::after{content:'';position:absolute;left:0;right:0;bottom:0;height:40px;opacity:.5;background:radial-gradient(circle at 50% 0,#8ed3ec 0 45%,transparent 46%) 0 0/60px 40px repeat-x;animation:wv 7s linear infinite;pointer-events:none}.sec-w::before{content:'💧';position:absolute;right:16px;top:8px;animation:drip 4s ease-in infinite;opacity:0}@keyframes drip{0%{transform:translateY(0);opacity:.9}70%,100%{transform:translateY(46px);opacity:0}}.sec-w .bar i{background:linear-gradient(90deg,#19a7c9,#0b6fa4)}
+.sec-e{--card:#14213d;--ink:#fff4cc;--mut:#c9bd93;--line:#2a3a63;--g:#ffc61a;--g2:#2a3a63;--e:#ffd23f;--e2:#3a3219;--bg:#0d1730}.sec-e .bar{background:#2a3a63}.sec-e .bar i{background:repeating-linear-gradient(110deg,#ffc61a 0 14px,#ffe066 14px 28px);background-size:56px 100%;animation:ef 1.2s linear infinite}@keyframes ef{to{background-position:56px 0}}.sec-e h3::after{content:' ⚡';animation:zap 2.4s infinite}@keyframes zap{0%,90%,100%{opacity:1}94%{opacity:.25}}.sec-e .btn,.sec-w .btn{color:#14213d}.sec-w .btn{color:#fff}.sec-w .btn.alt{color:#0b6fa4}.sec-e .btn.alt{color:#ffd23f}
+.sec-w select,.sec-e select{background:var(--card);color:var(--ink)}
+.t-food{--g:#c4650c;--g2:#fde8d0}@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .t-food{--g:#f0a050;--g2:#3d2a17}}
+main{padding-top:58px}
+.hdr{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));right:10px;display:flex;gap:8px;z-index:6}
+.ib{position:relative;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:1.1rem;cursor:pointer;color:var(--ink);transition:transform .15s,box-shadow .2s}
+.ib:active{transform:scale(.92)}.ib.ring{animation:bl .5s ease-out}@keyframes bl{40%{transform:scale(1.12)}}
+.bdg{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;border-radius:9px;background:var(--r);color:#fff;font:800 .7rem/18px Nunito,sans-serif;padding:0 4px;font-style:normal;animation:sci .3s}
+#app{transition:opacity .14s ease-out,transform .14s ease-out}#app:not(.pre):not(.pout){transition-duration:.28s}#app.pout{opacity:0;transform:translateY(-6px)}#app.pre{opacity:0;transform:translateY(10px)}
+@keyframes up{from{opacity:0;transform:translateY(14px)}}@keyframes sci{from{opacity:0;transform:scale(.94)}}
+.rv{animation:up .5s cubic-bezier(.2,.8,.2,1) var(--d,0ms) both}.rv.sc{animation-name:sci}
+.sr{opacity:0;transform:translateY(14px);transition:opacity .5s ease-out,transform .5s cubic-bezier(.2,.8,.2,1)}.sr.in{opacity:1;transform:none}
+.pop{animation:sci .4s cubic-bezier(.2,1.4,.4,1)}
+.btn,.tile,.res,.card{transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .2s,filter .2s}
+@media(hover:hover){.btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.16);filter:brightness(1.06)}.tile:hover,.res:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(0,0,0,.14)}.card:hover{box-shadow:0 6px 18px rgba(0,0,0,.08)}.res.wa:hover .fx{transform:rotate(180deg)}nav a:hover span{transform:translateY(-2px) rotate(-6deg)}}
+.btn:active,.tile:active,.res:active{transform:scale(.96)!important;transition-duration:.08s}
+select,input{transition:border-color .2s,box-shadow .2s}select:focus,input:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 4px color-mix(in srgb,var(--g) 22%,transparent)}
+.shake{animation:sk .4s}@keyframes sk{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}input.shake,select.shake{border-color:var(--r)}
+.dots i{display:inline-block;width:6px;height:6px;margin:0 2px;border-radius:50%;background:currentColor;animation:bn .9s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}@keyframes bn{50%{transform:translateY(-5px)}}
+.mo{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:20px;background:rgba(8,20,12,0);transition:background .25s ease-out}.mo.in{background:rgba(8,20,12,.55)}.mo.out{background:rgba(8,20,12,0)}
+.mc{width:min(380px,100%);background:var(--card);border-radius:26px;padding:24px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3);opacity:0;transform:scale(.95);transition:opacity .25s ease-out,transform .3s cubic-bezier(.2,1.2,.4,1);max-height:86vh;overflow:auto}.mo.in .mc{opacity:1;transform:none}.mo.out .mc{opacity:0;transform:scale(.95)}
+.bd{font-size:4.2rem;width:110px;height:110px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,var(--g2),transparent 70%);animation:bdi .9s cubic-bezier(.2,1.3,.4,1) both}@keyframes bdi{0%{transform:scale(.2) rotate(-20deg);opacity:0}60%{transform:scale(1.15) rotate(8deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+.mc .tt,.mc .up2{animation:up .5s ease-out .5s both}.up2{font-weight:800;letter-spacing:.04em;color:var(--g);margin:0 auto}.mc h2{margin:4px 0}.lvl h2{font-size:2rem}
+.tg{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;text-align:left}.tg input{appearance:none;-webkit-appearance:none;width:48px;height:28px;padding:0;border:0;border-radius:14px;background:var(--line);position:relative;cursor:pointer;flex:none;transition:background .25s}.tg input::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .25s cubic-bezier(.3,1.4,.5,1)}.tg input:checked{background:var(--g)}.tg input:checked::after{transform:translateX(20px)}
+.cnt{text-shadow:0 0 12px var(--e)}.ringwrap.glow svg{animation:rg 1.2s ease-out}@keyframes rg{40%{filter:drop-shadow(0 0 12px #ffe27a)}}
+.ck{display:inline-block;animation:ckp .45s cubic-bezier(.2,1.6,.4,1)}@keyframes ckp{from{transform:scale(0) rotate(-40deg)}}
+.step{transition:background .3s,color .3s}.step.cur::after{content:'';display:inline-block;width:8px;height:8px;margin-left:8px;border-radius:50%;background:var(--g);animation:pu2 1.4s infinite}@keyframes pu2{50%{transform:scale(1.6);opacity:.4}}
+.toast{transition:transform .45s cubic-bezier(.2,1.3,.4,1)}
+nav a{position:relative;z-index:1;transition:color .25s}nav a.on{background:transparent}nav a span{transition:transform .2s}
+.ind{position:absolute;left:0;border-radius:12px;background:var(--g2);transition:transform .38s cubic-bezier(.3,1.25,.5,1),opacity .2s;pointer-events:none}
+.bar i{transition:transform .9s cubic-bezier(.2,.8,.2,1)!important;will-change:transform}
+.card.row.up{animation:rk 1.4s ease-out}@keyframes rk{30%{box-shadow:0 0 0 3px var(--g)}}
+.cksvg{width:46px;height:46px;display:block}.ckc{fill:none;stroke:var(--line);stroke-width:3}.ckp2{fill:none;stroke:var(--g);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40}
+.chk.done .ckc{stroke:var(--g);stroke-dasharray:145;animation:cdr .6s ease-out}.chk.done .ckp2{animation:pdr .4s .45s ease-out forwards}.chk.done{display:inline-block;animation:pp .45s .85s}
+.chk.fin .ckc{animation:none}.chk.fin .ckp2{animation:none;stroke-dashoffset:0}.chk.fin{animation:none}
+@keyframes cdr{from{stroke-dashoffset:145}to{stroke-dashoffset:0}}@keyframes pdr{to{stroke-dashoffset:0}}@keyframes pp{50%{transform:scale(1.15)}}
+@media(prefers-reduced-motion:reduce){.chk.done .ckp2{stroke-dashoffset:0}}
+
+.res.wa .fx{animation:none!important;transition:transform .8s cubic-bezier(.3,1.3,.5,1)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head>
+<body>
+<div class="toast" id="toast" role="status"></div>
+<div class="hdr"><button class="ib" id="bell" aria-label="Notifications" onclick="openBell()">🔔<i class="bdg" id="bdg"></i></button><button class="ib" aria-label="Settings" onclick="openSettings()">⚙️</button></div>
+<main id="app"></main>
+<nav id="nav" aria-label="Main"></nav>
+<script>
+var S={pts:1245,rescued:7.4,done:{},foodStep:-1,donated:0,tab:'w',plan:null,explain:null,bell:[
+'Organic waste collection in 2 hours.','Your household improved water efficiency by 12% this month!','Electricity usage is a little higher than expected.'],appr:{}};
+var NAV=[['home','🏠','Home'],['learn','🌍','Learn'],['actions','🌱','Actions'],['food','🍲','Food'],['track','📊','Track'],['community','👥','Community']];
+var P=[
+['🌡️','Climate change','Greenhouse gases trap heat, raising temperatures, shifting rainfall and lifting sea levels.','Heat waves, floods and ecosystem stress put communities at risk, especially people with fewer resources.',['Walk or cycle short trips','Use public transport or carpool','Cut unnecessary electricity use','Reduce food waste','Repair and reuse products'],'Governments and utilities decarbonise power and transport.'],
+['🌳','Deforestation and habitat loss','Forests are cleared for land conversion, which destroys habitat and releases stored carbon.','Wildlife loses homes and the land stores less carbon.',['Protect existing trees','Plant native species','Reduce paper waste','Join local conservation'],'Businesses can clean up supply chains; governments protect land.'],
+['🐝','Biodiversity loss','Species and pollinators are declining as habitats shrink and ecosystems break down.','Food, water and climate stability depend on healthy ecosystems.',['Plant native plants','Create pollinator-friendly spaces','Avoid unnecessary pesticides','Protect local habitats'],'Councils protect habitat corridors and green space.'],
+['🗑️','Waste generation','Household waste keeps growing, filling landfills and producing methane from organic waste.','Resources are lost and pollution rises.',['Refuse, reduce, reuse, repair, recycle, compost','Separate organic and recyclable waste','Compost kitchen scraps'],'Municipalities run collection and recycling systems. Preventing waste beats recycling alone.'],
+['🧴','Plastic pollution','Single-use plastics break into microplastics that last for centuries and harm wildlife.','Plastic reaches oceans, soil and food chains.',['Carry a reusable bottle and bag','Use refill containers','Avoid extra packaging','Dispose of plastic correctly'],'Producers can redesign packaging; governments set rules.'],
+['💧','Water scarcity and pollution','Freshwater is limited; groundwater is depleting and rivers and lakes are polluted.','Safe water is essential for health and farming.',['Fix leaks','Turn off taps','Take shorter showers','Harvest rainwater where suitable','Keep chemicals out of drains'],'Utilities fix leaking networks; farms and industry cut demand.'],
+['🍲','Food waste','Households discard edible food, wasting the water, energy and land used to grow it.','Wasted food creates emissions while others go hungry.',['Plan meals','Store food correctly','Eat leftovers','Compost scraps','Donate safe surplus food'],'Food rescue groups and businesses redistribute surplus.'],
+['🌾','Unsustainable agriculture','Intensive farming can degrade soil, use large amounts of water and chemicals and convert habitat.','Farming must feed people without wearing out land.',['Reduce food waste','Grow some food','Choose seasonal food where practical','Diversify your diet'],'Farmers, researchers and policy makers shift practices.'],
+['⚡','Energy consumption','Fossil-fuel electricity and inefficient use drive emissions and household waste.','Cutting waste lowers bills and emissions.',['Switch off unused devices','Use efficient appliances','Use natural light and airflow','Consider renewables'],'Grids add renewables; builders improve efficiency.'],
+['🚗','Transport and air pollution','Vehicles burn fossil fuel, causing emissions, traffic, noise and poor air.','Air pollution harms health, especially for children and the elderly.',['Walk or cycle','Take public transport','Carpool','Combine trips'],'Cities build transit, safe cycling and walking routes.'],
+['🛍️','Overconsumption','Extracting materials, manufacturing and shipping all carry impacts, and products are replaced too quickly.','Resources are finite.',['Buy less, buy better','Use things longer','Repair','Reuse and borrow'],'Producers can design durable, repairable goods.'],
+['👕','Fast fashion and textile waste','Excess clothing production uses many resources and ends up as waste.','Clothes are worn briefly then discarded.',['Buy fewer, durable clothes','Buy second-hand','Repair clothing','Reuse textiles'],'Brands can slow production; councils can collect textiles.'],
+['📱','Electronic waste','Devices are replaced quickly, wasting valuable materials and creating toxic waste.','Mining and improper disposal harm people and land.',['Keep devices longer','Repair','Buy refurbished','Recycle e-waste properly'],'Manufacturers can offer repair and take-back.'],
+['🌊','Ocean and marine pollution','Plastic, chemicals and waste flow into waterways while habitats and fish stocks are under pressure.','Marine life and coastal livelihoods suffer.',['Reduce plastic','Prevent litter','Join cleanups','Dispose of waste correctly'],'Governments manage fisheries and sewage.'],
+['🌱','Soil degradation','Erosion, lost organic matter and contamination reduce soil life and fertility.','Healthy soil grows food and stores water.',['Compost','Grow plants','Cover bare soil','Garden sustainably'],'Farmers and planners protect soil.'],
+['🏙️','Urban heat','Concrete-heavy areas with little vegetation absorb heat and lose natural cooling.','Hot cities raise health risks and energy demand.',['Plant trees','Create green spaces','Support shade','Cut unnecessary cooling'],'Planners add trees, shade and cool surfaces.'],
+['🌧️','Flooding and poor rainwater management','Paved surfaces, blocked drains and lost vegetation stop water soaking in.','Floods damage homes and spread pollution.',['Keep drains clear','Support rainwater harvesting','Plant vegetation','Use permeable surfaces'],'Cities maintain drainage and protect wetlands.'],
+['☣️','Chemical pollution','Household, farm and industrial chemicals contaminate water, soil and air when disposed of badly.','Contamination harms ecosystems and health.',['Choose safer products','Avoid unneeded chemicals','Dispose of hazardous waste correctly','Never pour chemicals down drains'],'Regulators and industry control emissions.']];
+var A=[
+['🚲','Walk instead of driving a short trip',10,2,'15 min','Free','Cuts fuel use and air pollution.','transport'],
+['🚌','Take public transport once',10,2,'30 min','Low','Fewer vehicles on the road.','transport'],
+['🚿','Take a shorter shower',3,1,'5 min','Free','Saves around 20 L.','water'],
+['🔧','Fix a dripping tap',15,2,'20 min','Low','Stops steady water loss.','water'],
+['💡','Turn off unused appliances',2,1,'2 min','Free','Cuts standby electricity.','energy'],
+['🌬️','Use natural ventilation instead of cooling',5,1,'Ongoing','Free','Saves electricity.','energy'],
+['♻️','Separate household waste today',3,1,'5 min','Free','Raises recycling quality.','waste'],
+['🪱','Start composting kitchen scraps',20,3,'1 hr','Low','Diverts methane-forming waste.','waste'],
+['🍲','Plan meals and use leftovers',10,2,'15 min','Free','Prevents food waste.','food'],
+['🌿','Plant a native plant',25,3,'1 hr','Low','Supports pollinators and shade.','nature'],
+['🛠️','Repair an item instead of replacing it',20,3,'1 hr','Low','Extends product life.','consumption'],
+['🧴','Use a reusable bottle or bag',2,1,'Ongoing','Free','Avoids single-use plastic.','consumption'],
+['🧹','Join a community cleanup',50,3,'2 hr','Free','Keeps waste out of waterways. Verified by organiser QR code.','nature']];
+function $(s){return document.querySelector(s)}
+function toast(t){var e=$('#toast');e.textContent=t;e.className='toast show';setTimeout(function(){e.className='toast'},2600)}
+function add(n,why){S.pts+=n;toast('🎉 +'+n+' points · '+why)}
+function bar(p,c){return '<div class="bar"><i style="width:'+Math.min(100,p)+'%'+(c?';background:'+c:'')+'"></i></div>'}
+function pct(u,t){return Math.round(u/t*100)}
+var FR=.86; // 26 of 30 days elapsed
+function meter(ic,name,u,t,unit,col,key){
+ var proj=Math.round(u/FR),p=pct(u,t),st=proj<=t?['pill','🟢 On track']:['pill o','🟠 May exceed target'];
+ var alert=p>FR*100+10?'<p class="chain" style="background:var(--e2);color:var(--e)">'+ic+' Your usage is higher than expected: '+p+'% used with '+Math.round(FR*100)+'% of the month gone. Check for leaks or standby devices.</p>':'';
+ var ex=S.explain===key?'<p class="pill b">Explanation sent for admin review</p>':'<details><summary>Explain unusual usage</summary><label for="r'+key+'">Reason</label><select id="r'+key+'"><option>Guests</option><option>Medical needs</option><option>Plumbing issue</option><option>Construction</option><option>Family event</option><option>Meter problem</option><option>Other</option></select><p></p><button class="btn alt" onclick="S.explain=\''+key+'\';route()">Send explanation</button></details>';
+ return '<div class="card sec-'+key+'"><div class="row"><h3>'+ic+' '+name+'</h3><span class="'+st[0]+'">'+st[1]+'</span></div>'+bar(p,col)+'<p class="mut">Used '+u.toLocaleString()+' '+unit+' of '+t.toLocaleString()+' · Remaining '+(t-u).toLocaleString()+' · Projected '+proj.toLocaleString()+' '+unit+'</p>'+alert+ex+'</div>'}
+var V={};
+V.home=function(){return '<div class="topbar"><div><h1>🏡 Green Household</h1><span class="mut">4 members · Rank #12 · 🌳 Green Guardian</span></div><div class="pill o" style="font-size:1rem">🏆 '+S.pts.toLocaleString()+'</div></div>'+
+'<div class="hero"><h2 style="margin-top:0">Have food you can’t eat?</h2><p>Safe surplus food can reach a neighbour in need.</p><button class="btn big" onclick="go(\'food\')">🍲 I have surplus food</button></div>'+
+'<div class="stats"><div class="stat"><b>♻️ 6:00 PM</b>Next organic waste pickup</div><div class="stat e"><b>⚡ 372 kWh</b>of 450 target</div><div class="stat w"><b>💧 9,850 L</b>of 12,000 target</div><div class="stat r"><b>🍲 '+S.rescued.toFixed(1)+' kg</b>food rescued</div></div>'+
+'<h2>Your starting plan</h2><p class="mut">Small steps. Potential weekly reward: 37 points.</p>'+planCards()+
+'<div class="card"><h3>New here?</h3><p>Start with what we’re trying to solve, then find where you can make the biggest difference.</p><button class="btn" onclick="go(\'learn\')">🌍 Explore the problems</button> <button class="btn alt" onclick="go(\'plan\')">🎯 Build my plan</button></div>'};
+var TA=[['💧','Save water','Turn off the tap while brushing.',5,1],['⚡','Save energy','Turn off unused appliances.',5,1],['♻️','Manage waste','Separate today’s organic waste.',3,1],['🚲','Green travel','Walk or cycle a short trip.',10,2]];
+S.td={};S.streak=12;S.snd=true;S.score=742;var AC=null;
+function chime(){if(!S.snd)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();var t=AC.currentTime;[660,880,1175].forEach(function(f,i){var o=AC.createOscillator(),g=AC.createGain(),s=t+i*.09;o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.12,s+.02);g.gain.exponentialRampToValueAtTime(.001,s+.35);o.connect(g);g.connect(AC.destination);o.start(s);o.stop(s+.4)})}catch(e){}}
+function burst(el){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;var r=el.getBoundingClientRect();for(var i=0;i<16;i++){var s=document.createElement('span');s.className='leaf';s.textContent=i%3?'🍃':'✨';s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';s.style.setProperty('--dx',(Math.random()*200-100)+'px');s.style.setProperty('--dy',(-60-Math.random()*100)+'px');document.body.appendChild(s);setTimeout(function(n){n.remove()},1200,s)}}
+function tdo(i,b){if(S.td[i])return;S.td[i]=1;var a=TA[i],c=$('#ta'+i);S.pts+=a[3];chime();burst(b);c.classList.add('done','glow');b.textContent='✓ Completed';b.disabled=true;var f=document.createElement('span');f.className='float';f.textContent='+'+a[3];c.appendChild(f);setTimeout(function(){f.remove()},1100);$('#ptsv').textContent=S.pts.toLocaleString();var n=Object.keys(S.td).length;$('#tdn').textContent=n+' of 4 done today';if(n==1){S.streak++;$('#stk').textContent=S.streak;$('#stk2').textContent=S.streak;var d=$('#sday');d.className='day on bump';d.textContent='✓'}}
+function homeFx(){var c=$('#ring'),n=$('#scv'),st=null;requestAnimationFrame(function(){requestAnimationFrame(function(){c.style.strokeDashoffset=339.3*(1-S.score/1000)})});requestAnimationFrame(function f(ts){st=st||ts;var p=Math.min(1,(ts-st)/1300);n.textContent=Math.round(S.score*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})}
+function tdCard(i){var a=TA[i],d=S.td[i];return '<div class="card ta'+(d?' done':'')+'" id="ta'+i+'"><span class="ic">'+a[0]+'</span><div style="flex:1;min-width:140px"><h3>'+a[1]+'</h3><p class="mut" style="margin:0 0 6px">'+a[2]+'</p><span class="pill">+'+a[3]+' points</span> <span class="pill o">'+(a[4]>1?'Moderate':'Easy')+'</span></div><button class="btn" '+(d?'disabled':'')+' onclick="tdo('+i+',this)">'+(d?'✓ Completed':'Complete')+'</button></div>'}
+V.home=function(){var h=new Date().getHours(),g=h<12?'Good morning':h<18?'Good afternoon':'Good evening',n=Object.keys(S.td).length,d='';for(var k=0;k<7;k++)d+=(k<6||n)?'<span class="day on">✓</span>':'<span class="day pulse" id="sday">•</span>';
+ return '<div class="topbar"><span class="pill o" style="font-size:1rem">🏆 <span id="ptsv">'+S.pts.toLocaleString()+'</span> pts</span><button class="btn alt" aria-label="Toggle sound" onclick="S.snd=!S.snd;this.textContent=S.snd?\'🔊\':\'🔇\'">'+(S.snd?'🔊':'🔇')+'</button></div>'+
+ '<section class="hero2"><p>'+g+', Neeraj 🌱</p><h1>You’re making a difference.</h1><p>Your household sustainability score is <b>742</b> this month.</p><div class="ringwrap" role="img" aria-label="Score 742 out of 1000"><svg viewBox="0 0 120 120"><circle class="rb" cx="60" cy="60" r="54"/><circle id="ring" class="rf" cx="60" cy="60" r="54" transform="rotate(-90 60 60)"/></svg><div class="rcn"><b id="scv">0</b><span>/ 1000</span></div></div><p class="up">▲ +18% better than last month</p></section>'+
+ '<div class="card streak"><h3>🔥 <span id="stk">'+S.streak+'</span> Day Green Streak</h3><p class="mut" style="margin:0">You’ve taken sustainable actions for <span id="stk2">'+S.streak+'</span> consecutive days.</p><div class="days">'+d+'</div></div>'+
+ '<div class="row"><h2>🌱 Today’s actions</h2><span class="mut" id="tdn">'+n+' of 4 done today</span></div>'+[0,1,2,3].map(tdCard).join('')+
+ '<button class="btn big" style="background:var(--g);color:#fff;margin-bottom:12px" onclick="go(\'food\')">🍲 I have surplus food</button>'+
+ '<h2>Resource health</h2><div class="rgrid"><button class="res w" onclick="go(\'track\')"><i class="fx"></i><span>💧 Water</span><b>8,450 L</b><small>of 10,000 L</small>'+bar(85)+'<em>🟢 On track</em></button><button class="res e" onclick="go(\'track\')"><i class="fx"></i><span>⚡ Energy</span><b>287 kWh</b><small>of 350 kWh</small>'+bar(82)+'<em>🟢 Efficient</em></button><button class="res wa" onclick="go(\'track\')"><i class="fx">♻️</i><span>♻️ Waste</span><b>94%</b><small>segregation · next pickup 6:00 PM</small><em>🟢 Excellent</em></button><button class="res f" onclick="go(\'food\')"><i class="fx">❤️</i><span>🍲 Food</span><b>'+S.rescued.toFixed(1)+' kg</b><small>rescued</small><em>❤️ Great impact</em></button></div>'+
+ '<h2>What you’ve achieved</h2><div class="card"><span class="pill">🌳 Green Guardian</span> <span class="pill o">🍲 Food Saver</span> <span class="pill b">💧 Water Guardian</span><p class="mut" style="margin:8px 0 0">Rank #12 in your community · 1,245 lifetime points</p></div>'+
+ '<button class="card tile" style="width:100%" onclick="go(\'community\')"><div class="row"><b>👥 Palm Court community</b><span class="pill">78%</span></div>'+bar(78)+'<span class="mut">390 of 500 kg rescued this month. See challenges and leaderboards.</span></button>'+
+ '<h2>Your starting plan</h2>'+planCards()+'<div class="card"><h3>New here?</h3><p>Start with what we’re trying to solve, then find where you can make the biggest difference.</p><button class="btn" onclick="go(\'learn\')">🌍 Explore the problems</button> <button class="btn alt" onclick="go(\'plan\')">🎯 Build my plan</button></div>'};
+function planCards(){var ids=S.plan||[0,8,2,6,4];return ids.map(function(i){var a=A[i];return '<div class="card row"><span>'+a[0]+' '+a[1]+' <span class="pill">+'+a[2]+'</span></span><button class="btn alt" '+(S.done[i]?'disabled':'')+' onclick="doAct('+i+')">'+(S.done[i]?'Done ✓':'I did it ✓')+'</button></div>'}).join('')}
+function doAct(i){if(S.done[i])return;S.done[i]=1;add(A[i][2],A[i][1]);route()}
+V.learn=function(){return '<h1>🌍 What are we trying to solve?</h1><p>The planet faces interconnected environmental challenges. Learn how everyday choices can help reduce some of the pressures causing them.</p><p class="mut">Individuals can’t solve these alone. Governments, businesses, infrastructure, technology and communities all have big roles, and your actions add to theirs.</p><div class="grid">'+P.map(function(p,i){return '<button class="tile" onclick="go(\'problem-'+i+'\')"><span class="em">'+p[0]+'</span><b>'+p[1]+'</b></button>'}).join('')+'</div>'};
+V.problem=function(i){var p=P[i];if(!p)return V.learn();
+ var rel=A.map(function(a,j){return[a,j]}).filter(function(x){return x[0][7]==={0:'transport',5:'water',6:'food',8:'energy',3:'waste',4:'consumption'}[i]||x[0][7]===(i<3||i==14?'nature':'#')}).slice(0,2);
+ return '<button class="btn alt" onclick="go(\'learn\')">‹ All problems</button><h1 style="margin-top:12px">'+p[0]+' '+p[1]+'</h1>'+
+'<div class="card"><h3>1. What is happening?</h3><p>'+p[2]+'</p></div><div class="card"><h3>2. Why does it matter?</h3><p>'+p[3]+'</p></div>'+
+'<div class="card"><h3>3. What can communities and organisations do?</h3><p>'+p[5]+'</p></div>'+
+'<div class="card"><h3>4. What can I personally do?</h3><ul>'+p[4].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>'+
+(i==5?'<button class="btn" onclick="go(\'track\')">See my water dashboard →</button> ':'')+(i==6?'<button class="btn" onclick="go(\'food\')">Open Food Rescue →</button> ':'')+(i==8?'<button class="btn" onclick="go(\'track\')">See my energy dashboard →</button> ':'')+
+'<button class="btn alt" onclick="go(\'actions\')">See actions I can take →</button>'+
+(rel.length?'<h2>Try this today</h2>'+rel.map(function(r){return actCard(r[0],r[1])}).join(''):'')};
+function stars(n){return '⭐'.repeat(n)}
+function actCard(a,i){return '<div class="card"><div class="row"><h3>'+a[0]+' '+a[1]+'</h3><span class="pill">+'+a[2]+'</span></div><p class="mut">Difficulty '+stars(a[3])+' · '+a[4]+' · Cost: '+a[5]+'<br>'+a[6]+'</p><button class="btn" '+(S.done[i]?'disabled':'')+' onclick="doAct('+i+')">'+(S.done[i]?'Done ✓':'Take this action')+'</button></div>'}
+V.actions=function(){var cats={transport:'🚲 Transport',water:'💧 Water',energy:'⚡ Energy',waste:'♻️ Waste',food:'🍲 Food',nature:'🌱 Nature',consumption:'🛍️ Consumption'},h='<h1>🌱 Action library</h1><p class="mut">Everyday actions use “I did it”. Larger ones ask for a photo or organiser confirmation. Daily limits prevent point farming.</p>';
+ for(var c in cats){h+='<h2>'+cats[c]+'</h2>'+A.map(function(a,i){return a[7]===c?actCard(a,i):''}).join('')}return h};
+V.plan=function(){return '<h1>🎯 Where can you make the biggest difference?</h1><p class="mut">Tell us about your situation. We’ll suggest realistic first steps.</p>'+
+['Transport|I mostly:|Walk or cycle,Drive,Use public transport','Waste|Recycling near me is:|Easy to access,Hard to access','Time|Time I have each week:|Under 1 hour,1 to 3 hours,More than 3 hours','Budget|My budget for green changes:|Free only,A little,Flexible'].map(function(q,k){var s=q.split('|');return '<label for="q'+k+'">'+s[1]+'</label><select id="q'+k+'">'+s[2].split(',').map(function(o){return '<option>'+o+'</option>'}).join('')+'</select>'}).join('')+
+'<p></p><button class="btn" onclick="mkPlan()">Create my plan</button>'};
+function mkPlan(){var t=$('#q0').value,a=$('#q1').value,tm=$('#q2').value,b=$('#q3').value,ids=[8,2,4];
+ ids.push(t=='Drive'?0:1);ids.push(a=='Easy to access'?6:7);if(tm!=='Under 1 hour'&&b!=='Free only')ids.push(9);
+ S.plan=ids;toast('Your plan is ready');go('home')}
+var FS=['Pickup requested','Collector assigned','Collector on the way','Food collected','Delivered to partner organisation'],FI=['🟡','🔵','🚗','🟢','🏠'];
+V.food=function(){var h='<h1>🍲 Food rescue</h1><p>Report safe surplus food. A partner organisation checks it before anyone receives it.</p>';
+ if(S.foodStep>=0){h+='<div class="card"><h3>Your pickup</h3><div class="steps">'+FS.map(function(s,i){return '<div class="step'+(i<=S.foodStep?' on':'')+(i==S.foodStep?' cur':'')+'">'+FI[i]+' '+s+'</div>'}).join('')+'</div>';
+  if(S.foodStep<4)h+='<button class="btn" onclick="advFood()">Demo: next stage</button>';
+  else h+='<p class="chain">❤️ You rescued 3.2 kg of surplus food! +30 sustainability points</p><button class="btn alt" onclick="S.foodStep=-1;route()">New donation</button>';h+='</div>'}
+ else h+='<div class="card"><label for="ft">Food type</label><select id="ft"><option>Rice</option><option>Curry</option><option>Vegetables</option><option>Bread</option><option>Fruits</option><option>Packaged food</option><option>Other</option></select>'+
+ '<label for="fq">Approximate quantity</label><select id="fq"><option>Small (under 1 kg)</option><option selected>Medium (1 to 3 kg)</option><option>Large (over 3 kg)</option></select>'+
+ '<label for="fp">Hours since it was prepared</label><input id="fp" type="number" min="0" step="0.5" value="1">'+
+ '<label for="fs">How was it stored?</label><select id="fs"><option value="hot">Kept hot</option><option value="cold">Refrigerated</option><option value="room">Room temperature</option><option value="sealed">Sealed packaging</option></select>'+
+ '<label for="fh">Expected to stay safe for (hours)</label><input id="fh" type="number" min="0" step="0.5" value="3">'+
+ '<label for="fa">Allergens (optional)</label><input id="fa" placeholder="e.g. nuts, dairy, gluten">'+
+ '<label for="fu">Pickup urgency</label><select id="fu"><option>Within 30 minutes</option><option>Within 1 hour</option><option selected>Within 2 hours</option><option>Later today</option></select><p></p><button class="btn" onclick="sendFood()">Request pickup</button><p class="mut" style="margin-top:10px">Safety first: we check preparation time, storage and safe holding time. Questionable food is never added to the network, and partners can still reject it. Recipient details are never shown.</p></div>';
+ return h+'<div class="card"><h3>This month</h3><div class="stats"><div class="stat"><b>'+S.rescued.toFixed(1)+' kg</b>food rescued</div><div class="stat"><b>~'+Math.round(S.rescued*2.4)+'</b>est. meals supported</div></div></div>'};
+function sendFood(){var p=+$('#fp').value,h=+$('#fh').value,s=$('#fs').value,ft=$('#ft').value;
+ var bad=(p>=h)?'This food has passed, or is at, its safe holding time.':(s=='room'&&p>2&&s!='sealed')?'Cooked food left at room temperature for over 2 hours isn’t safe to redistribute.':(p>4&&s=='hot'&&ft!='Packaged food')?'Hot food held over 4 hours can’t enter the network.':'';
+ if(bad){toast('Can’t send this one: '+bad+' Please compost it instead.');return}
+ S.foodStep=0;toast('Sent for partner safety review');route()}
+function advFood(){S.foodStep++;if(S.foodStep==4){S.rescued+=3.2;add(30,'food rescued')}route()}
+V.track=function(){var wk=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+ return '<h1>📊 Water, energy and waste</h1><p class="mut">Targets are set for your household size, season and community rules. Your detailed usage stays private.</p>'+
+ meter('💧','Water',8450,10000,'L','','w')+meter('⚡','Electricity',287,350,'kWh','','e')+
+ '<p class="mut">Within target +100 · 10% below +120 · 20% below +150. Targets keep a safe minimum for hygiene, health and comfort. Legitimate reasons are never penalised.</p>'+
+ '<h2>♻️ Waste calendar</h2><div class="card"><div class="row"><span>🟢 <b>Organic</b> daily, 6:00 PM</span><span class="pill">Reminder 2 h before</span></div><div class="row" style="margin-top:8px"><span>🔵 <b>Recyclables</b> weekly, Saturday</span><span class="pill b">Reminder 24 h before</span></div><p class="mut" style="margin-top:8px">Also: plastic, paper, glass, metal, e-waste, hazardous waste.</p><button class="btn" onclick="add(3,\'proper segregation\')">Segregated today ✓ (+3)</button></div>'+
+ '<div class="card"><h3>Segregation consistency</h3>'+bar(93)+'<p class="mut">93% over the last 30 days</p></div>'};
+var LB={g:[['Household 7',1310],['Household 31',1288],['You',null],['Household 18',1190],['Household 42',1105]],i:[['Household 55','+34%'],['You','+12%'],['Household 9','+10%']],c:[['Household 18','12 pickups'],['Household 42','9 pickups'],['You','3 pickups']]};
+V.community=function(){var t=S.tab,rows=LB[t].map(function(r,i){var v=r[1]===null?S.pts:r[1];return '<div class="card row" style="margin:6px 0;'+(r[0]=='You'?'border-color:var(--g)':'')+'"><span>'+(i+1)+'. '+r[0]+'</span><b>'+(typeof v=='number'?v.toLocaleString()+' pts':v)+'</b></div>'}).join('');
+ var feed=[['🌱','Household 42 completed 30 days of waste segregation.'],['🍲','Household 18 rescued 4 kg of surplus food.'],['🌳','25 households joined the planting challenge.']];
+ return '<h1>👥 Palm Court community</h1><p class="mut">Friendly monthly challenges. We celebrate progress and never publicly shame anyone.</p>'+
+ '<h2>This month’s challenges</h2>'+[['🍲 Rescue 500 kg','390 of 500 kg',78],['💧 Save 100,000 litres','64,000 L',64],['🌱 Plant 500 native plants','210 plants',42]].map(function(c){return '<div class="card"><div class="row"><b>'+c[0]+'</b><span class="pill">'+c[2]+'%</span></div>'+bar(c[2])+'<span class="mut">'+c[1]+' · everyone who contributes is rewarded</span></div>'}).join('')+
+ '<h2>🏆 Leaderboards</h2><div class="tabs">'+[['g','Greenest'],['i','Most improved'],['c','Champions']].map(function(x){return '<button class="btn '+(t==x[0]?'':'alt')+'" onclick="S.tab=\''+x[0]+'\';route()">'+x[1]+'</button>'}).join('')+'</div>'+rows+
+ '<label style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="checkbox" style="width:auto" onchange="toast(this.checked?\'Your household is hidden on leaderboards\':\'Your household is visible\')"> Hide my household on leaderboards</label>'+
+ '<h2>Community feed</h2>'+feed.map(function(f,i){return '<div class="card"><p>'+f[0]+' '+f[1]+'</p><button class="btn alt" onclick="S.appr['+i+']=1;route()">'+(S.appr[i]?'❤️ Sent':'❤️ Appreciate')+'</button> <button class="btn alt" onclick="toast(\'👏 Encouragement sent\')">👏</button></div>'}).join('')+
+ '<h2>Monthly awards</h2><div class="grid">'+['🏆 Green Champion','🍲 Food Rescue','💧 Water Guardian','⚡ Energy Saver','♻️ Waste Warrior','❤️ Community Hero','🌱 Most Improved'].map(function(a){return '<div class="card" style="margin:0;text-align:center">'+a+'</div>'}).join('')+'</div>'};
+V.impact=function(){return '<h1>🌍 Your impact</h1><p class="mut">Environmental values are estimates unless directly measured.</p><div class="stats"><div class="stat"><b>~'+Math.round(S.rescued*2.5+60)+' kg</b>CO₂e avoided (est.)</div><div class="stat"><b>'+S.rescued.toFixed(1)+' kg</b>food rescued</div><div class="stat w"><b>1,550 L</b>water saved vs target</div><div class="stat e"><b>63 kWh</b>energy saved vs target</div></div>'+
+ '<details class="card" style="margin-top:12px"><summary>How is this calculated?</summary><p class="mut">Food: about 2.5 kg CO₂e per kg of food rescued. Water and energy: target minus actual use. Emission factors vary by region, so treat these as estimates.</p></details>'+
+ '<h2>Level and badges</h2><p>🌱 Beginner → 🌿 Eco Explorer → <b>🌳 Green Guardian</b> → 🌎 Earth Champion → 🌍 Sustainability Leader</p><p style="font-size:1.6rem">🍲 💧 ⚡ ♻️ 🌱</p>'+
+ '<h2>🌍 Our community</h2><div class="stats"><div class="stat">🍲 <b>2,340 kg</b>food rescued</div><div class="stat w">💧 <b>120,000 L</b>water saved</div><div class="stat e">⚡ <b>4,500 kWh</b>saved</div><div class="stat">♻️ <b>8,200 kg</b>waste managed</div></div>'+
+ '<h2>Notifications</h2>'+S.bell.map(function(n){return '<div class="card">🔔 '+n+'</div>'}).join('')+
+ '<h2>Score weighting</h2><p class="mut">40% resource efficiency against your own target, 25% food and waste, 20% community, 15% consistency and improvement. Admins can adjust weights, so families of different sizes compete fairly.</p>'};
+function go(h){location.hash=h}
+function route(){var h=(location.hash||'#home').slice(1),m=h.split('-'),k=m[0];if(!V[k]){k='home'}
+ $('#app').innerHTML=V[k](m[1]);document.body.className='t-'+k;if(k=='home')homeFx();$('#nav').innerHTML=NAV.concat([['impact','📈','Impact']]).map(function(n){return '<a href="#'+n[0]+'" class="'+((k==n[0]||(k=='problem'&&n[0]=='learn')||(k=='plan'&&n[0]=='home'))?'on':'')+'"><span>'+n[1]+'</span>'+n[2]+'</a>'}).join('');window.scrollTo(0,0)}
+</script>
+<script>
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,MOB=innerWidth<600,ANIM=false;
+/* ---------- Sound system (Web Audio, no files) ---------- */
+var SND={s:{fx:1,nt:1,cel:1},t:0,ctx:null};
+try{var sv=JSON.parse(localStorage.getItem('gs-snd')||'null');if(sv)SND.s=sv}catch(e){}
+function save(){try{localStorage.setItem('gs-snd',JSON.stringify(SND.s))}catch(e){}}
+Object.defineProperty(S,'snd',{get:function(){return !!SND.s.fx},set:function(v){SND.s.fx=v?1:0;save()}});
+function tone(list,cat,vol){if(!SND.s[cat])return;SND.t=performance.now();try{var C=SND.ctx=SND.ctx||new (window.AudioContext||window.webkitAudioContext)();if(C.state=='suspended')C.resume();var t=C.currentTime;list.forEach(function(x){var o=C.createOscillator(),g=C.createGain(),s=t+x[1];o.type=x[3]||'sine';o.frequency.setValueAtTime(x[0],s);g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(vol,s+.01);g.gain.exponentialRampToValueAtTime(.0001,s+x[2]);o.connect(g);g.connect(C.destination);o.start(s);o.stop(s+x[2]+.02)})}catch(e){}}
+function playClick(p){p?tone([[520,0,.09],[780,.05,.11]],'fx',.06):tone([[420,0,.06]],'fx',.045)}
+function playSuccess(){tone([[523,0,.14],[659,.08,.14],[784,.16,.22]],'fx',.07)}
+function playPoints(){tone([[600,0,.08],[800,.07,.08],[1000,.14,.12]],'fx',.05)}
+function playAchievement(){tone([[784,0,.15],[988,.1,.15],[1319,.2,.3]],'cel',.08)}
+function playLevelUp(){tone([[523,0,.15],[659,.12,.15],[784,.24,.15],[1047,.36,.4]],'cel',.09)}
+function playError(){tone([[300,0,.14,'triangle'],[240,.09,.18,'triangle']],'fx',.05)}
+function playNotification(){tone([[880,0,.1],[1175,.1,.16]],'nt',.05)}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button,.tile,nav a,.res');if(!b||b.disabled||performance.now()-SND.t<40)return;playClick(b.classList.contains('btn')&&!b.classList.contains('alt'))});
+/* ---------- Motion utilities ---------- */
+function ease(p){return 1-Math.pow(1-p,3)}
+function ob(fn){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){fn(e.target);o.unobserve(e.target)}})},{threshold:.1});return o}
+function fmt(v,d){return v.toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d})}
+function countTo(el,from,to,d,suf,pre,dur){if(!el)return;pre=pre||'';suf=suf||'';if(RM){el.textContent=pre+fmt(to,d)+suf;return}var st=null;el.classList.add('cnt');requestAnimationFrame(function f(ts){st=st||ts;var p=Math.min(1,(ts-st)/(dur||900));el.textContent=pre+fmt(from+(to-from)*ease(p),d)+suf;if(p<1)requestAnimationFrame(f);else el.classList.remove('cnt')})}
+var IO=ob(function(e){e.classList.add('in')}),BO=ob(function(i){i.style.transform='scaleX('+i._p+')'}),
+CO=ob(function(el){var m=el.textContent.match(/^(\D*?)([\d,]+(?:\.\d+)?)(.*)$/);if(!m||/^[:\/]/.test(m[3]))return;countTo(el,0,parseFloat(m[2].replace(/,/g,'')),(m[2].split('.')[1]||'').length,m[3],m[1],900)});
+function burst(el,n){if(RM||!el)return;var r=el.getBoundingClientRect(),k=n||(MOB?8:14),em=['🍃','🍃','✨','🌱'];for(var i=0;i<k;i++){var s=document.createElement('span');s.className='leaf';s.textContent=em[i%4];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';s.style.setProperty('--dx',(Math.random()*220-110)+'px');s.style.setProperty('--dy',(-60-Math.random()*100)+'px');document.body.appendChild(s);setTimeout(function(x){x.remove()},1200,s)}}
+function toast2(a,b){var e=$('#toast');e.innerHTML='<b>'+a+'</b><br><span style="font-weight:700;opacity:.9">'+b+'</span>';e.className='toast show';clearTimeout(e._t);e._t=setTimeout(function(){e.className='toast'},2800)}
+/* ---------- Modal ---------- */
+function modal(html,cls){var m=document.createElement('div');m.className='mo';m.innerHTML='<div class="mc '+(cls||'')+'" role="dialog" aria-modal="true">'+html+'<button class="btn" style="margin-top:14px" data-x>Continue</button></div>';document.body.appendChild(m);
+ function kd(e){if(e.key=='Escape')close()}function close(){m.classList.add('out');document.removeEventListener('keydown',kd);setTimeout(function(){m.remove()},260)}
+ document.addEventListener('keydown',kd);m.addEventListener('click',function(e){if(e.target==m||e.target.hasAttribute('data-x'))close()});requestAnimationFrame(function(){m.classList.add('in')});m.querySelector('[data-x]').focus();return m}
+function badge(em,title,sub,pts,lvl){var m=modal('<div class="bd">'+em+'</div><p class="up2">'+(lvl?'LEVEL UP!':'NEW BADGE')+'</p><h2 class="tt">'+title+'</h2><p class="mut tt">'+sub+'</p>'+(pts?'<span class="pill tt">+'+pts+' points</span>':''),lvl?'lvl':'');lvl?playLevelUp():playAchievement();setTimeout(function(){burst(m.querySelector('.bd'),MOB?12:20)},350)}
+window.openSettings=function(){var rows=[['fx','🔊 Sound effects'],['nt','🔔 Notification sounds'],['cel','🎉 Celebration sounds']],m=modal('<h2>⚙️ Settings</h2><p class="mut">Sounds are short and subtle. Your choices are saved on this device.</p>'+rows.map(function(r){return '<label class="tg"><span>'+r[1]+'</span><input type="checkbox" data-k="'+r[0]+'" '+(SND.s[r[0]]?'checked':'')+'></label>'}).join(''));
+ [].forEach.call(m.querySelectorAll('[data-k]'),function(i){i.onchange=function(){SND.s[i.dataset.k]=i.checked?1:0;save();if(i.checked){SND.t=0;playClick(true)}}})};
+S.un=3;S.ch=[78,64,42];
+function bdg(){var b=$('#bdg');b.textContent=S.un||'';b.style.display=S.un?'':'none'}
+window.openBell=function(){S.un=0;bdg();modal('<h2>🔔 Notifications</h2>'+S.bell.map(function(n){return '<p style="text-align:left;margin:0 0 8px">'+n+'</p>'}).join(''))};
+function notify(msg){S.bell.unshift(msg);S.un++;bdg();playNotification();var b=$('#bell');b.classList.remove('ring');void b.offsetWidth;b.classList.add('ring')}
+/* ---------- Points, levels, actions ---------- */
+function grant(n){var from=S.pts;S.pts+=n;countTo($('#ptsv'),from,S.pts,0,'','',700);if(location.hash=='#community')setTimeout(function(){lbUpdate(true)},250);if(S.pts>=1500&&!S.lv){S.lv=1;setTimeout(function(){badge('🌎','EARTH CHAMPION','You reached a new sustainability level.',0,1)},900)}}
+window.add=function(n,why){grant(n);playPoints();toast2('🌱 Great job!','+'+n+' points · '+why)};
+window.tdo=function(i,b){if(S.td[i])return;S.td[i]=1;var a=TA[i],c=$('#ta'+i);playSuccess();setTimeout(playPoints,160);burst(b);c.classList.add('done','glow');b.innerHTML='<span class="ck">✓</span> Completed';b.disabled=true;
+ var f=document.createElement('span');f.className='float';f.textContent='+'+a[3];c.appendChild(f);setTimeout(function(){f.remove()},1100);grant(a[3]);toast2('🌱 Great job!','+'+a[3]+' points · 1 step closer to the next level');
+ var n=Object.keys(S.td).length;$('#tdn').textContent=n+' of 4 done today';
+ if(n==1){S.streak++;$('#stk').textContent=S.streak;$('#stk2').textContent=S.streak;var d=$('#sday');d.className='day on bump';d.textContent='✓'}
+ if(n==4&&!S.bd){S.bd=1;setTimeout(function(){badge('♻️','Waste Warrior','Completed every daily action today',100);grant(100)},1000)}};
+window.homeFx=function(){var c=$('#ring'),n=$('#scv'),w=$('.ringwrap'),off=339.3*(1-S.score/1000);if(!ANIM||RM){c.style.transition='none';c.style.strokeDashoffset=off;n.textContent=S.score;return}
+ setTimeout(function(){countTo(n,0,S.score,0,'','',1200);setTimeout(function(){w.classList.add('glow')},1250)},300);setTimeout(function(){c.style.strokeDashoffset=off},500)};
+/* ---------- Food rescue ---------- */
+window.sendFood=function(){var p=+$('#fp').value,h=+$('#fh').value,s=$('#fs').value,ft=$('#ft').value,
+ bad=(p>=h)?'This food has passed, or is at, its safe holding time.':(s=='room'&&p>2)?'Cooked food left at room temperature for over 2 hours isn’t safe to redistribute.':(p>4&&s=='hot'&&ft!='Packaged food')?'Hot food held over 4 hours can’t enter the network.':'';
+ if(bad){playError();['fp','fh','fs'].forEach(function(id){var e=$('#'+id);e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake')});toast('Can’t send this one: '+bad+' Please compost it instead.');return}
+ var b=document.querySelector('button[onclick="sendFood()"]');b.disabled=true;b.innerHTML='<span class="dots"><i></i><i></i><i></i></span> Sending';
+ setTimeout(function(){S.foodStep=0;route();var c=$('#app .card');if(c)c.classList.add('pop');playSuccess();toast2('❤️ Food Rescue Request Created','A partner will review it shortly.')},900)};
+window.advFood=function(){S.foodStep++;var done=S.foodStep==4;if(done){S.rescued+=3.2;grant(30)}route();notify(done?'🍲 Your food was delivered. Thank you!':'🍲 '+FS[S.foodStep]);
+ if(done){playSuccess();burst($('#app .chain'),MOB?12:18);toast2('❤️ You helped prevent food waste today!','+30 sustainability points')}};
+window.contrib=function(i,c,b){if(S.ch[i]>=100)return;var o=S.ch[i],n=S.ch[i]=Math.min(100,o+5);c.querySelector('.bar i').style.transform='scaleX('+n/100+')';countTo(c.querySelector('.pill'),o,n,0,'%','',600);grant(15);playPoints();
+ if(n>=100){b.disabled=true;b.textContent='✓ Complete';setTimeout(function(){burst(c,MOB?14:24);badge('🏆','Community Challenge Complete!','Everyone who contributed is rewarded.',50);grant(50)},500)}};
+function chHook(){var cs=[].filter.call($('#app').querySelectorAll('.card'),function(c){var b=c.querySelector('.row b');return b&&/Rescue 500|Save 100,000|Plant 500/.test(b.textContent)});
+ cs.forEach(function(c,i){var p=S.ch[i];c.querySelector('.pill').textContent=p+'%';c.querySelector('.bar i').style.width=p+'%';var b=document.createElement('button');b.className='btn alt';b.style.marginTop='8px';b.textContent=p>=100?'✓ Complete':'+ Contribute';b.disabled=p>=100;b.onclick=function(){contrib(i,c,b)};c.appendChild(b)})}
+if(!LB[S.tab])S.tab='g';
+function lbUpdate(an){if(S.tab!='g')return;var rows=[].slice.call(document.querySelectorAll('#app .card.row[style*="margin:6px 0"]'));if(!rows.length)return;
+ var par=rows[0].parentNode,anc=rows[rows.length-1].nextSibling,top=new Map();rows.forEach(function(r){top.set(r,r.getBoundingClientRect().top)});
+ var it=rows.map(function(r){var nm=r.children[0].textContent.replace(/^\d+\.\s*/,'').replace(/\s*▲.*$/,'');return{r:r,nm:nm,v:nm=='You'?S.pts:parseInt(r.children[1].textContent.replace(/\D/g,''),10)}});
+ it.sort(function(a,b){return b.v-a.v});
+ it.forEach(function(x,i){par.insertBefore(x.r,anc);x.r.children[0].textContent=(i+1)+'. '+x.nm;x.r.children[1].textContent=x.v.toLocaleString()+' pts'});
+ var me=it.findIndex(function(x){return x.nm=='You'})+1,old=S.lbR;S.lbR=me;
+ if(an&&!RM)it.forEach(function(x){var d=top.get(x.r)-x.r.getBoundingClientRect().top;if(d){x.r.style.transition='none';x.r.style.transform='translateY('+d+'px)';void x.r.offsetWidth;x.r.style.transition='transform .7s cubic-bezier(.2,.8,.2,1)';x.r.style.transform='';setTimeout(function(){x.r.style.transition=''},800)}});
+ if(an&&old&&me<old){var y=it[me-1].r;y.classList.add('up');y.children[0].insertAdjacentHTML('beforeend',' <span class="pill">▲ '+(old-me)+'</span>');playPoints();toast2('📈 You moved up!','Rank #'+old+' → #'+me)}}
+S.col={o:0,r:0};
+function colRow(k,em,name,sub){var d=S.col[k];return '<div class="row" style="justify-content:flex-start;gap:12px;margin:8px 0"><span class="chk'+(d?' done fin':'')+'"><svg viewBox="0 0 52 52" class="cksvg" aria-hidden="true"><circle class="ckc" cx="26" cy="26" r="23"/><path class="ckp2" d="M15 27l8 8 15-17"/></svg></span><span style="flex:1;min-width:120px"><b>'+em+' '+name+'</b><br><span class="mut">'+sub+'</span></span><button class="btn alt" '+(d?'disabled':'')+' onclick="colDone(\''+k+'\',this)">'+(d?'✓ Collected':'Confirm collected')+'</button></div>'}
+function colCard(){return '<div class="card"><h3>Collection status</h3>'+colRow('o','🟢','Organic waste','Today · 6:00 PM')+colRow('r','🔵','Recyclables','Saturday')+'</div>'}
+window.colDone=function(k,b){if(S.col[k])return;S.col[k]=1;var c=b.parentNode.querySelector('.chk'),p=k=='o'?3:10;c.classList.add('done');b.textContent='✓ Collected';b.disabled=true;playSuccess();burst(c,MOB?6:10);setTimeout(function(){grant(p);toast2('♻️ Collection complete','+'+p+' points · thanks for separating your waste')},650)};
+var _tr=V.track;V.track=function(){return _tr().replace('<p class="mut">Within target','<div class="chain">⚡ <b>12%</b> lower than last month</div><p class="mut">Within target').replace('<div class="card"><h3>Segregation consistency</h3>',colCard()+'<div class="card"><h3>Segregation consistency</h3>')};
+/* ---------- Routing, stagger, bars, nav indicator ---------- */
+function stag(){var home=!!$('#ring'),D=[0,100,650,780,860,940,1020,1100,1160];[].forEach.call($('#app').children,function(c,i){
+ if(c.classList.contains('rgrid')){[].forEach.call(c.children,function(r,j){r.classList.add('rv');r.style.setProperty('--d',(1180+j*80)+'ms')});return}
+ if(i<(home?9:7)){c.classList.add('rv');c.style.setProperty('--d',(home?D[i]:i*60)+'ms');if(c.classList.contains('hero2'))c.classList.add('sc')}else{c.classList.add('sr');IO.observe(c)}})}
+function bars(){[].forEach.call($('#app').querySelectorAll('.bar i'),function(i){i._p=(parseFloat(i.style.width)||0)/100;i.style.width='100%';i.style.transformOrigin='left';i.style.transition='none';var anim=ANIM&&!RM;i.style.transform=anim?'scaleX(0)':'scaleX('+i._p+')';void i.offsetWidth;i.style.transition='';if(anim)BO.observe(i)})}
+var IND=document.createElement('i');IND.className='ind';
+function mvInd(){var n=$('#nav');IND.style.transition='none';n.insertBefore(IND,n.firstChild);var a=n.querySelector('a.on');if(!a){IND.style.opacity=0;return}IND.style.opacity=1;IND.style.width=a.offsetWidth+'px';IND.style.height=a.offsetHeight+'px';IND.style.top=a.offsetTop+'px';if(!IND.style.transform)IND.style.transform='translateX('+a.offsetLeft+'px)';void IND.offsetWidth;IND.style.transition='';IND.style.transform='translateX('+a.offsetLeft+'px)'}
+var _route=route;
+route=function(){_route();if((location.hash||'').slice(1).split('-')[0]=='community'){chHook();lbUpdate(false)}bars();if(ANIM&&!RM){stag();[].forEach.call($('#app').querySelectorAll('.stat b,.res b,.chain b'),function(e){CO.observe(e)})}mvInd()};
+addEventListener('hashchange',function(){var a=$('#app');if(RM){ANIM=true;route();ANIM=false;return}a.classList.add('pout');
+ setTimeout(function(){ANIM=true;route();ANIM=false;a.style.transition='none';a.classList.remove('pout');a.classList.add('pre');void a.offsetWidth;a.style.transition='';a.classList.remove('pre')},140)});
+addEventListener('resize',mvInd);
+ANIM=true;route();ANIM=false;bdg();
+})();
+
+
+</script></body></html>
